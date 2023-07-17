@@ -17,10 +17,14 @@ listings_link_body2 = soup.select('[data-cy="listing-item-link"]')
 total_listings_body = listings_link_body1 + listings_link_body2
 listings_link_body = [str(link) for link in total_listings_body]
 
+
 def has_zl_mc(text):
     return 'zł/mc' in text or "zł/miesiąc" in text
+
+
 def has_pokoje_mc(text):
     return 'pokoje' in text or 'pokój' in text
+
 
 def has_m2_mc(text):
     return 'm²' in text
@@ -68,6 +72,5 @@ workbook = writer.book
 worksheet = writer.sheets['Sheet1']
 
 hyperlink_format = workbook.add_format({'color': 'blue', 'underline': 1})
-
 
 writer._save()
