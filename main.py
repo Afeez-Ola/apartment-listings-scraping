@@ -32,6 +32,7 @@ listing_data = []
 for listing in listings.find_all('a', class_='css-1up0y1q e1n6ljqa3'):
     location = listing.find('p', class_='css-14aokuk e1ualqfi4').get_text().strip()
     link = listing.get('href')
+    link = "https://otodom" + link
     price_text = listing.find('span', class_='css-1on0450 ei6hyam2', string=has_zl_mc)
     price = int(price_text.get_text().strip()[:4]) if price_text else None
     room_text = listing.find("span", class_="css-1on0450 ei6hyam2", string=has_pokoje_mc)
@@ -59,4 +60,17 @@ for listing in listings.find_all('a', class_='css-1up0y1q e1n6ljqa3'):
 listings_dataframe = pd.DataFrame(listing_data)
 pprint(listings_dataframe)
 output_file = "Apartments_for_rent_Katowice.xlsx"
-listings_dataframe.to_excel(output_file, index=False)
+writer = pd.ExcelWriter(output_file, engine='xlsxwriter')
+
+listings_dataframe.to_excel(writer, index=False)
+
+workbook = writer.book
+worksheet = writer.sheets['Sheet1']
+
+hyperlink_format = workbook.add_format({'color': 'blue', 'underline': 1})
+
+worksheet.set_column('A:A', None, hyperlink_format)
+for row_num, address in enumerate(listings_dataframe['ADDRESS'], start=1):
+    worksheet.write_url(row_num, 0, address)
+
+writer.save()
