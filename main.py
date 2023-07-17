@@ -73,4 +73,4 @@ worksheet.set_column('A:A', None, hyperlink_format)
 for row_num, address in enumerate(listings_dataframe['ADDRESS'], start=1):
     worksheet.write_url(row_num, 0, address)
 
-writer.save()
+writer._save()
