@@ -69,8 +69,5 @@ worksheet = writer.sheets['Sheet1']
 
 hyperlink_format = workbook.add_format({'color': 'blue', 'underline': 1})
 
-worksheet.set_column('A:A', None, hyperlink_format)
-for row_num, address in enumerate(listings_dataframe['LINK'], start=1):
-    worksheet.write_url(row_num, 0, address)
 
 writer._save()
