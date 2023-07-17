@@ -32,7 +32,7 @@ listing_data = []
 for listing in listings.find_all('a', class_='css-1up0y1q e1n6ljqa3'):
     location = listing.find('p', class_='css-14aokuk e1ualqfi4').get_text().strip()
     link = listing.get('href')
-    link = "https://otodom" + link
+    link = "https://www.otodom.pl" + link
     price_text = listing.find('span', class_='css-1on0450 ei6hyam2', string=has_zl_mc)
     price = int(price_text.get_text().strip()[:4]) if price_text else None
     room_text = listing.find("span", class_="css-1on0450 ei6hyam2", string=has_pokoje_mc)
