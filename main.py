@@ -33,28 +33,6 @@ def has_m2_mc(text):
 
 
 listings = BeautifulSoup("".join(listings_link_body), 'html.parser')
-# prices = listings.find_all('span', class_='css-1on0450 ei6hyam2', string=has_zl_mc)
-# listing_prices = [span.get_text().strip() for span in prices]
-# listing_prices = [int(value[:4].strip()) for value in listing_prices]
-#
-# listings_location = listings.find_all('p', class_='css-14aokuk e1ualqfi4')
-# listings_locations = [location.get_text().strip() for location in listings_location]
-#
-# rooms = listings.find_all("span", class_="css-1on0450 ei6hyam2", string=has_pokoje_mc)
-# listings_room = [room.get_text().strip() for room in rooms]
-#
-# areas = listings.find_all('span', class_='css-1on0450 ei6hyam2', string=has_m2_mc)
-# listings_area = [area.get_text().strip() for area in areas]
-# # print(f"{listing_prices}, \n{listings_locations}, \n{listings_room}, \n{listings_area}")
-#
-# listing_data = [
-#     {
-#         'location': listings_locations,
-#         'price': listing_prices,
-#         'rooms': listings_room,
-#         'area': listings_area
-#     }
-# ]
 
 listing_data = []
 for listing in listings.find_all('a', class_='css-1up0y1q e1n6ljqa3'):
@@ -74,11 +52,11 @@ for listing in listings.find_all('a', class_='css-1up0y1q e1n6ljqa3'):
         additional_cost = int(float(additional_cost))
 
     listing_info = {
-        'location': location,
-        'price': price,
-        'rooms': rooms,
-        'area': area,
-        'additional cost': additional_cost
+        'ADDRESS': location,
+        'PRICE (zł)': price,
+        'ROOMS': rooms,
+        'AREA': area,
+        'ADDITIONAL COST (zł)': additional_cost
     }
     listing_data.append(listing_info)
 
